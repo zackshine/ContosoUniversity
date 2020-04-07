@@ -20,6 +20,7 @@ namespace ContosoUniversity.Controllers
         // GET: Student
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, int?page)
         {
+            
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";

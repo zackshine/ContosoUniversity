@@ -42,14 +42,15 @@ namespace ContosoUniversity.Controllers
         public ActionResult Index(int? SelectedDepartment)
         {
             var departments = db.Departments.OrderBy(q => q.Name).ToList();
-            ViewBag.SelectedDepartment = new SelectList(departments, "DepartmentID", "Name", SelectedDepartment);
+            ViewBag.SelectedDepartments = new SelectList(departments, "DepartmentID", "Name", SelectedDepartment);
+
             int departmentID = SelectedDepartment.GetValueOrDefault();
 
             IQueryable<Course> courses = db.Courses
                 .Where(c => !SelectedDepartment.HasValue || c.DepartmentID == departmentID)
                 .OrderBy(d => d.CourseID)
                 .Include(d => d.Department);
-           
+            
             return View(courses.ToList());
         }
         // GET: Course/Details/5
